@@ -1,1 +1,46 @@
 
+name: Build Pygame Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            git zip unzip openjdk-17-jdk \
+            python3-pip python3-venv \
+            build-essential autoconf libtool \
+            pkg-config zlib1g-dev
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Buildozer
+        run: |
+          pip install --upgrade pip
+          pip install buildozer cython==0.29.36
+
+      - name: Check project files
+        run: |
+          ls -la
+          test -f car_game_apk.py
+
+      - name: Build APK
+        run: |
+          echo "Project checked successfully."
+          echo "Pygame Android recipe must be configured before packaging."
+          
