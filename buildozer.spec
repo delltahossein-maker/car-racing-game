@@ -6,7 +6,6 @@ package.name = carracing
 package.domain = org.mygame
 
 source.dir = .
-source.main = car_game_apk.py
 
 source.include_exts = py,png,jpg,jpeg,wav,ogg,ttf,json
 
