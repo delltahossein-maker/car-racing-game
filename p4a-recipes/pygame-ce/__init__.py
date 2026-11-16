@@ -1,10 +1,11 @@
 
-from os.path import join
+from pythonforandroid.recipe import (
+    CompiledComponentsPythonRecipe
+)
+from pythonforandroid.toolchain import current_directory
 
-from pythonforandroid.recipe import CompiledComponentsPythonRecipe
 
-
-class PygameCERecipe(CompiledComponentsPythonRecipe):
+class PygameCeRecipe(CompiledComponentsPythonRecipe):
 
     version = "2.5.0"
 
@@ -13,8 +14,8 @@ class PygameCERecipe(CompiledComponentsPythonRecipe):
         "pygame-ce/archive/refs/tags/{version}.tar.gz"
     )
 
-    site_packages_name = "pygame-ce"
     name = "pygame-ce"
+    site_packages_name = "pygame-ce"
 
     depends = [
         "sdl2",
@@ -29,6 +30,13 @@ class PygameCERecipe(CompiledComponentsPythonRecipe):
     call_hostpython_via_targetpython = False
     install_in_hostpython = False
 
+    def prebuild_arch(self, arch):
+        super().prebuild_arch(arch)
 
-recipe = PygameCERecipe()
+        with current_directory(self.get_build_dir(arch.arch)):
+            pass
+
+
+recipe = PygameCeRecipe()
+
 
