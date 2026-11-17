@@ -48,3 +48,14 @@ jobs:
           path: bin/*.apk
           if-no-files-found: error
           
+      - name: Install Android Build Tools
+        run: |
+          SDK="$HOME/.buildozer/android/platform/android-sdk"
+          mkdir -p "$SDK"
+          yes | sdkmanager --sdk_root="$SDK" --licenses
+          sdkmanager --sdk_root="$SDK" \
+            "platform-tools" \
+            "platforms;android-33" \
+            "build-tools;33.0.2"
+          find "$SDK/build-tools" -name aidl -type f
+          
